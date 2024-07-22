@@ -2,13 +2,13 @@ package me.luji.study.post;
 
 import org.springframework.context.ApplicationEvent;
 
-public class PostPublishEvent extends ApplicationEvent {
+public class PostPublishedEvent extends ApplicationEvent {
 
     private final Post post;
 
-    public PostPublishEvent(Object source, Post post) {
+    public PostPublishedEvent(Object source) {
         super(source);
-        this.post = post;
+        this.post = (Post) source;
     }
 
     public Post getPost() {

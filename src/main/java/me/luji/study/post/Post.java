@@ -1,11 +1,13 @@
 package me.luji.study.post;
 
 import jakarta.persistence.*;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 import java.util.Date;
 
 @Entity
-public class Post {
+public class Post extends AbstractAggregateRoot<Post> {
+
     @Id @GeneratedValue
     private long id;
 
@@ -47,5 +49,11 @@ public class Post {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public Post publish() {
+        this.registerEvent(new PostPublishedEvent(this));
+
+        return this;
     }
 }
